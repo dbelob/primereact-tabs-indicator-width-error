@@ -1,122 +1,84 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { Code } from '@primeicons/react/code';
+import { CodeBranch } from '@primeicons/react/code-branch';
+import { Cog } from '@primeicons/react/cog';
+import { InfoCircle } from '@primeicons/react/info-circle';
+import { Tabs } from '@primereact/ui/tabs';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+export default function App() {
+    return (
+        <>
+            <div>
+                <h2>PrimeReact: Tabs (defaultValue="tab1")</h2>
+                <Tabs.Root defaultValue="tab1">
+                    <Tabs.List>
+                        <Tabs.Tab value="tab1" className="flex items-center gap-2">
+                            <Code />
+                            Code
+                        </Tabs.Tab>
+                        <Tabs.Tab value="tab2" className="flex items-center gap-2">
+                            <InfoCircle />
+                            Issues
+                        </Tabs.Tab>
+                        <Tabs.Tab value="tab3" className="flex items-center gap-2">
+                            <CodeBranch />
+                            Pull Requests
+                        </Tabs.Tab>
+                        <Tabs.Tab value="tab4" className="flex items-center gap-2">
+                            <Cog />
+                            Settings
+                        </Tabs.Tab>
+                        <Tabs.Indicator />
+                    </Tabs.List>
+                    <Tabs.Panels>
+                        <Tabs.Panel value="tab1">
+                            <h2 className="text-lg font-bold">Code</h2>
+                            <p className="text-surface-500 mt-1">
+                                Browse the source files, review the latest commits, and clone the repository to get started.
+                            </p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab2">
+                            <h2 className="text-lg font-bold">Issues</h2>
+                            <p className="text-surface-500 mt-1">Track open bugs, feature requests, and ongoing discussions reported by the community.</p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab3">
+                            <h2 className="text-lg font-bold">Pull Requests</h2>
+                            <p className="text-surface-500 mt-1">Review proposed changes, leave feedback, and merge contributions into the main branch.</p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab4">
+                            <h2 className="text-lg font-bold">Settings</h2>
+                            <p className="text-surface-500 mt-1">
+                                Manage repository access, configure integrations, and adjust visibility and collaboration rules.
+                            </p>
+                        </Tabs.Panel>
+                    </Tabs.Panels>
+                </Tabs.Root>
+            </div>
+            <div>
+                <h2>PrimeReact: Tabs (defaultValue="tab2")</h2>
+                <Tabs.Root defaultValue="tab2">
+                    <Tabs.List>
+                        <Tabs.Tab value="tab1">Account Info</Tabs.Tab>
+                        <Tabs.Tab value="tab2">Payment</Tabs.Tab>
+                        <Tabs.Tab value="tab3">Preferences</Tabs.Tab>
+                        <Tabs.Indicator />
+                    </Tabs.List>
+                    <Tabs.Panels>
+                        <Tabs.Panel value="tab1">
+                            <h2 className="text-lg font-bold">Account Info</h2>
+                            <p className="text-surface-500 mt-1">Update your personal information such as name, email address, and profile picture.</p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab2">
+                            <h2 className="text-lg font-bold">Payment</h2>
+                            <p className="text-surface-500 mt-1">Manage your subscription plan, view invoices, and update your payment method.</p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab3">
+                            <h2 className="text-lg font-bold">Preferences</h2>
+                            <p className="text-surface-500 mt-1">Customize how the application looks and behaves to match your personal preferences.</p>
+                        </Tabs.Panel>
+                    </Tabs.Panels>
+                </Tabs.Root>
+            </div>
+        </>
+    );
 }
-
-export default App
