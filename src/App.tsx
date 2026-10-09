@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Code } from '@primeicons/react/code';
 import { CodeBranch } from '@primeicons/react/code-branch';
 import { Cog } from '@primeicons/react/cog';
@@ -6,6 +7,25 @@ import { Tabs } from '@primereact/ui/tabs';
 import './App.css'
 
 export default function App() {
+    const [loadedData, setLoadedData] = useState<string | undefined>(undefined);
+
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const loadData = async (): Promise<string> => {
+        console.log("Loading data...");
+
+        await sleep(3000);
+
+        console.log("Data loaded");
+
+        return 'Success';
+    }
+
+    useEffect(() => {
+        loadData()
+            .then(response => setLoadedData(response));
+    }, []);
+
     return (
         <>
             <div>
@@ -78,6 +98,10 @@ export default function App() {
                         </Tabs.Panel>
                     </Tabs.Panels>
                 </Tabs.Root>
+            </div>
+            <div>
+                <h2>Data Load</h2>
+                {loadedData ? 'Result: ' + loadedData : 'Loading...'}
             </div>
         </>
     );
