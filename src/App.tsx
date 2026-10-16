@@ -7,28 +7,37 @@ import { Tabs } from '@primereact/ui/tabs';
 import './App.css'
 
 export default function App() {
-    const [loadedData, setLoadedData] = useState<string | undefined>(undefined);
-
-    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-    const loadData = async (): Promise<string> => {
-        console.log("Loading data...");
-
-        await sleep(3000);
-
-        console.log("Data loaded");
-
-        return 'Success';
-    }
+    const [fontApplied, setFontApplied] = useState<boolean>(false);
 
     useEffect(() => {
-        loadData()
-            .then(response => setLoadedData(response));
+        // 1. Simulate late font arrival after 3 seconds.
+        // We add a global CSS class to document body to trigger layout shift
+        // entirely outside of PrimeReact's internal state cycles.
+        const timer = setTimeout(() => {
+            const style = document.createElement('style');
+            style.id = 'reproducer-fout-styles';
+            style.innerHTML = `
+            /* We target the raw text containers inside the tabs to force layout expansion */
+            .reproducer-scope .p-tab {
+              font-family: "Courier New", Courier, monospace !important;
+              font-size: 22px !important;
+              letter-spacing: 5px !important;
+              font-weight: bold !important;
+            }
+          `;
+            document.head.appendChild(style);
+            setFontApplied(true);
+        }, 3000);
+
+        return () => {
+            clearTimeout(timer);
+            document.getElementById('reproducer-fout-styles')?.remove();
+        };
     }, []);
 
     return (
         <>
-            <div>
+            <div className="reproducer-scope">
                 <h2>PrimeReact: Tabs (defaultValue="tab1")</h2>
                 <Tabs.Root defaultValue="tab1">
                     <Tabs.List>
@@ -74,7 +83,7 @@ export default function App() {
                     </Tabs.Panels>
                 </Tabs.Root>
             </div>
-            <div>
+            <div className="reproducer-scope">
                 <h2>PrimeReact: Tabs (defaultValue="tab2")</h2>
                 <Tabs.Root defaultValue="tab2">
                     <Tabs.List>
@@ -101,7 +110,24 @@ export default function App() {
             </div>
             <div>
                 <h2>Data Load</h2>
-                {loadedData ? 'Result: ' + loadedData : 'Loading...'}
+                <div style={{
+                    padding: '12px',
+                    marginBottom: '20px',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    backgroundColor: fontApplied ? '#fde8e8' : '#fff3cd',
+                    border: `1px solid ${fontApplied ? '#f8b4b4' : '#ffe082'}`
+                }}>
+                    <strong>Simulation State:</strong> {fontApplied ? (
+                        <span style={{ color: '#c53030' }}>
+                            ❌ BUG IMITATED: The text expanded, but the active indicator bar remains small/misaligned!
+                        </span>
+                    ) : (
+                        <span style={{ color: '#b7791f' }}>
+                            ⏳ INITIAL RENDERING: Default system fonts active. Waiting 3 seconds...
+                        </span>
+                    )}
+                </div>
             </div>
         </>
     );
