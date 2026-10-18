@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Code } from '@primeicons/react/code';
 import { CodeBranch } from '@primeicons/react/code-branch';
 import { Cog } from '@primeicons/react/cog';
@@ -7,37 +7,13 @@ import { Tabs } from '@primereact/ui/tabs';
 import './App.css'
 
 export default function App() {
-    const [fontApplied, setFontApplied] = useState<boolean>(false);
-
     useEffect(() => {
-        // 1. Simulate late font arrival after 3 seconds.
-        // We add a global CSS class to document body to trigger layout shift
-        // entirely outside of PrimeReact's internal state cycles.
-        const timer = setTimeout(() => {
-            const style = document.createElement('style');
-            style.id = 'reproducer-fout-styles';
-            style.innerHTML = `
-            /* We target the raw text containers inside the tabs to force layout expansion */
-            .reproducer-scope .p-tab {
-              font-family: "Courier New", Courier, monospace !important;
-              font-size: 22px !important;
-              letter-spacing: 5px !important;
-              font-weight: bold !important;
-            }
-          `;
-            document.head.appendChild(style);
-            setFontApplied(true);
-        }, 3000);
-
-        return () => {
-            clearTimeout(timer);
-            document.getElementById('reproducer-fout-styles')?.remove();
-        };
+        //TODO: add data load
     }, []);
 
     return (
         <>
-            <div className="reproducer-scope">
+            <div>
                 <h2>PrimeReact: Tabs (defaultValue="tab1")</h2>
                 <Tabs.Root defaultValue="tab1">
                     <Tabs.List>
@@ -83,7 +59,7 @@ export default function App() {
                     </Tabs.Panels>
                 </Tabs.Root>
             </div>
-            <div className="reproducer-scope">
+            <div>
                 <h2>PrimeReact: Tabs (defaultValue="tab2")</h2>
                 <Tabs.Root defaultValue="tab2">
                     <Tabs.List>
@@ -110,24 +86,6 @@ export default function App() {
             </div>
             <div>
                 <h2>Data Load</h2>
-                <div style={{
-                    padding: '12px',
-                    marginBottom: '20px',
-                    borderRadius: '6px',
-                    fontSize: '14px',
-                    backgroundColor: fontApplied ? '#fde8e8' : '#fff3cd',
-                    border: `1px solid ${fontApplied ? '#f8b4b4' : '#ffe082'}`
-                }}>
-                    <strong>Simulation State:</strong> {fontApplied ? (
-                        <span style={{ color: '#c53030' }}>
-                            ❌ BUG IMITATED: The text expanded, but the active indicator bar remains small/misaligned!
-                        </span>
-                    ) : (
-                        <span style={{ color: '#b7791f' }}>
-                            ⏳ INITIAL RENDERING: Default system fonts active. Waiting 3 seconds...
-                        </span>
-                    )}
-                </div>
             </div>
         </>
     );
