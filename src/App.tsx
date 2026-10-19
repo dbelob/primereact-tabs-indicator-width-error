@@ -14,7 +14,7 @@ export default function App() {
                     <Tabs.List>
                         <Tabs.Tab value="tab1" className="flex items-center gap-2">
                             <Code />
-                            Code
+                            Very Very Very Very Very Very Very Very Very Very Very Very Long Application Code
                         </Tabs.Tab>
                         <Tabs.Tab value="tab2" className="flex items-center gap-2">
                             <InfoCircle />
@@ -58,7 +58,32 @@ export default function App() {
                 <h2>PrimeReact: Tabs (defaultValue="tab2")</h2>
                 <Tabs.Root defaultValue="tab2">
                     <Tabs.List>
-                        <Tabs.Tab value="tab1">Account Info</Tabs.Tab>
+                        <Tabs.Tab value="tab1">Very Very Very Very Very Very Very Very Very Very Very Very Long Account Info</Tabs.Tab>
+                        <Tabs.Tab value="tab2">Payment</Tabs.Tab>
+                        <Tabs.Tab value="tab3">Preferences</Tabs.Tab>
+                        <Tabs.Indicator />
+                    </Tabs.List>
+                    <Tabs.Panels>
+                        <Tabs.Panel value="tab1">
+                            <h2 className="text-lg font-bold">Account Info</h2>
+                            <p className="text-surface-500 mt-1">Update your personal information such as name, email address, and profile picture.</p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab2">
+                            <h2 className="text-lg font-bold">Payment</h2>
+                            <p className="text-surface-500 mt-1">Manage your subscription plan, view invoices, and update your payment method.</p>
+                        </Tabs.Panel>
+                        <Tabs.Panel value="tab3">
+                            <h2 className="text-lg font-bold">Preferences</h2>
+                            <p className="text-surface-500 mt-1">Customize how the application looks and behaves to match your personal preferences.</p>
+                        </Tabs.Panel>
+                    </Tabs.Panels>
+                </Tabs.Root>
+            </div>
+            <div>
+                <h2>PrimeReact: Tabs (defaultValue="tab3")</h2>
+                <Tabs.Root defaultValue="tab3">
+                    <Tabs.List>
+                        <Tabs.Tab value="tab1">Very Very Very Very Very Very Very Very Very Very Very Very Long Account Info</Tabs.Tab>
                         <Tabs.Tab value="tab2">Payment</Tabs.Tab>
                         <Tabs.Tab value="tab3">Preferences</Tabs.Tab>
                         <Tabs.Indicator />
