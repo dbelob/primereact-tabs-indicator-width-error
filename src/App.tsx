@@ -5,11 +5,19 @@ import { Cog } from '@primeicons/react/cog';
 import { InfoCircle } from '@primeicons/react/info-circle';
 import { Tabs } from '@primereact/ui/tabs';
 import './App.css'
+import type { MenuItem } from './components/menu/MenuItem';
+import TabMenu from './components/menu/TabMenu';
 
 export default function App() {
     useEffect(() => {
         //TODO: add data load
     }, []);
+
+    const menuItems: MenuItem[] = [
+        {label: 'Account Info'},
+        {label: 'Payment'},
+        {label: 'Preferences'}
+    ];
 
     return (
         <>
@@ -85,7 +93,8 @@ export default function App() {
                 </Tabs.Root>
             </div>
             <div>
-                <h2>Data Load</h2>
+                <h2>PrimeReact: TabMenu on base Tabs (activeIndex=1)</h2>
+                <TabMenu model={menuItems} activeIndex={1}/>
             </div>
         </>
     );
