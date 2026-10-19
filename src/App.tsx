@@ -93,8 +93,8 @@ export default function App() {
                 </Tabs.Root>
             </div>
             <div>
-                <h2>PrimeReact: TabMenu on base Tabs (activeIndex=1)</h2>
-                <TabMenu model={menuItems} activeIndex={1}/>
+                <h2>PrimeReact: TabMenu on base Tabs (activeIndex=2)</h2>
+                <TabMenu model={menuItems} activeIndex={2}/>
             </div>
         </>
     );
